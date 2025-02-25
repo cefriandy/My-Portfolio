@@ -6,6 +6,8 @@ interface SidebarProps {
   toggleSidebar: () => void;
 }
 
+//slay
+
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
   return (
     <div className={`sidebar text-white ${isOpen ? 'open' : ''}`}>
