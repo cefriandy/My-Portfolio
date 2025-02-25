@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
+import Home from './components/home/Home';
+import Header from './components/headers/Header';
+import Footer from './components/footer/Footer';
+import Loading from './loading/Loading';
+import ScrollToTop from './components/scroll/ScrollToTop';
 
-function App() {
+const App: React.FC = () => {
+  const [activePage, setActivePage] = useState('About');
+  const [theme, setTheme] = useState('light');
+  const [loading, setLoading] = useState(true);
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header setActivePage={setActivePage} toggleTheme={toggleTheme} theme={theme} />
+      <div className={`App ${theme}`}>
+        <Home activePage={activePage} theme={theme} />
+        <ScrollToTop />
+      </div>
+      <Footer />
+    </Router>
   );
-}
+};
 
 export default App;

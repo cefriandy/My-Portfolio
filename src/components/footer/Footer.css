@@ -1,0 +1,18 @@
+.footer {
+    background-color: #343a40;
+    color: white;
+    padding: 20px 0;
+}
+
+.footer p {
+    margin: 0;
+}
+
+.footer .nav-link {
+    color: white;
+    margin-left: 15px;
+}
+
+.footer .nav-link:hover {
+    color: #adb5bd;
+}
